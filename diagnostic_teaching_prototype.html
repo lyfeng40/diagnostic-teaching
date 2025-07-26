@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>診斷學學習與測驗平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+  <header class="bg-indigo-600 text-white py-4 px-6">
+    <h1 class="text-2xl font-bold">🧠 精神科診斷學互動學習頁</h1>
+    <p class="text-sm mt-1">整理條列知識 + 即時互動測驗</p>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6 space-y-10">
+
+    <!-- 區塊一：診斷知識大綱 -->
+    <section class="bg-white shadow-md rounded-2xl p-6">
+      <h2 class="text-xl font-bold mb-4">📚 精神科診斷概要</h2>
+      <ul class="list-disc list-inside space-y-2 text-base leading-relaxed">
+        <li><strong>幻覺：</strong>在無外界實質刺激下的感官經驗，分為 <em>AH（聽幻覺）</em>、<em>VH（視幻覺）</em>。</li>
+        <li><strong>思覺失調症：</strong>需持續至少6個月，包含幻覺、妄想、混亂語言或負性症狀等。</li>
+        <li><strong>雙極情感障礙：</strong>分為 Bipolar I（躁症發作）與 Bipolar II（輕躁症+鬱症）。</li>
+        <li><strong>憂鬱症：</strong>憂鬱情緒與失去興趣持續兩週以上，伴隨多項認知與行為症狀。</li>
+        <li><strong>認知障礙症（失智症）：</strong>日常功能顯著受損，並無譫妄狀態。</li>
+        <li><strong>錐體外症候群（EPS）：</strong>常見藥物副作用，如肌張力異常、靜坐不能等。</li>
+        <li><strong>人格疾患：</strong>分 A、B、C 群，影響人際、情緒、認知與衝動控制。</li>
+      </ul>
+    </section>
+
+    <!-- 區塊二：測驗開始按鈕 -->
+    <section class="text-center">
+      <button id="startTest" class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition">
+        🚀 開始 8 題診斷學測驗
+      </button>
+    </section>
+
+    <!-- 區塊三：互動題目區 -->
+    <section id="quizSection" class="hidden bg-white shadow-lg rounded-2xl p-6">
+      <h2 class="text-lg font-semibold mb-4">📝 題目 <span id="questionNumber">1</span>/8</h2>
+      <p id="questionText" class="text-md font-medium mb-4"></p>
+      <textarea id="userAnswer" rows="4" class="w-full p-3 border border-gray-300 rounded-xl mb-4" placeholder="請輸入你的作答..."></textarea>
+      <div class="flex justify-between">
+        <button id="submitAnswer" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl">送出作答</button>
+        <div id="feedback" class="text-sm text-gray-700 pt-2"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const questions = [
+      { text: "幻覺有哪些類型？請至少列出兩種。", keywords: ["聽幻覺", "視幻覺"] },
+      { text: "思覺失調症的診斷條件包含哪些？請列舉3項。", keywords: ["幻覺", "妄想", "負性症狀"] },
+      { text: "Bipolar I 與 Bipolar II 有何差異？", keywords: ["躁症", "輕躁症", "鬱症"] },
+      { text: "請列出憂鬱症的核心症狀。", keywords: ["憂鬱情緒", "失去興趣"] },
+      { text: "認知障礙症的診斷重點是什麼？", keywords: ["日常功能受損", "非譫妄"] },
+      { text: "EPS 是什麼？有哪些表現？", keywords: ["肌張力異常", "靜坐不能"] },
+      { text: "人格疾患可以分成哪三大群？請簡述其中一種。", keywords: ["A群", "B群", "C群"] },
+      { text: "鬱症的診斷條件持續多久？需具備哪些項目？", keywords: ["兩週", "憂鬱情緒", "失去興趣"] },
+    ];
+
+    let current = 0;
+
+    document.getElementById("startTest").addEventListener("click", () => {
+      document.getElementById("quizSection").classList.remove("hidden");
+      showQuestion();
+    });
+
+    function showQuestion() {
+      const q = questions[current];
+      document.getElementById("questionText").innerText = q.text;
+      document.getElementById("questionNumber").innerText = current + 1;
+      document.getElementById("userAnswer").value = "";
+      document.getElementById("feedback").innerText = "";
+    }
+
+    document.getElementById("submitAnswer").addEventListener("click", () => {
+      const userAns = document.getElementById("userAnswer").value.toLowerCase();
+      const keywords = questions[current].keywords;
+      const matched = keywords.filter(k => userAns.includes(k));
+      let scoreText = `✅ 關鍵字命中 ${matched.length}/${keywords.length}`;
+      document.getElementById("feedback").innerText = scoreText;
+      current++;
+      if (current < questions.length) {
+        setTimeout(showQuestion, 1500);
+      } else {
+        document.getElementById("questionText").innerText = "🎉 測驗完成！你可以重新整理頁面再次作答。";
+        document.getElementById("userAnswer").style.display = "none";
+        document.getElementById("submitAnswer").style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
