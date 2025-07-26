@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "question": "何謂 Hallucination？請說明 AH 與 VH 的意思。",
+    "keywords": ["幻覺", "無外在刺激", "AH", "聽幻覺", "VH", "視幻覺"]
+  },
+  {
+    "id": 2,
+    "question": "請說明 Schizophrenia 的診斷準則。",
+    "keywords": ["妄想", "幻覺", "胡言亂語", "功能下降", "持續6個月"]
+  },
+  {
+    "id": 3,
+    "question": "請列出 Bipolar affective disorder 的躁症與鬱症診斷重點。",
+    "keywords": ["躁症", "情緒高昂", "活動增加", "鬱症", "憂鬱", "失去興趣"]
+  },
+  {
+    "id": 4,
+    "question": "何謂 Dysthymic disorder？其診斷準則為何？",
+    "keywords": ["持續兩年", "憂鬱", "疲勞", "自卑", "無望"]
+  },
+  {
+    "id": 5,
+    "question": "請寫出 Major depression disorder 的診斷標準。",
+    "keywords": ["憂鬱情緒", "食慾變化", "睡眠變化", "無價值感", "自殺意念"]
+  },
+  {
+    "id": 6,
+    "question": "請說明 Dementia 的診斷準則。",
+    "keywords": ["認知下降", "IADL", "非譫妄", "非其他精神疾病"]
+  },
+  {
+    "id": 7,
+    "question": "EPS 是什麼？請舉例常見症狀。",
+    "keywords": ["錐體外", "肌張力異常", "靜坐不能", "巴金森", "運動困難"]
+  },
+  {
+    "id": 8,
+    "question": "請說明 Personality disorder 的診斷要點與三群分類。",
+    "keywords": ["認知", "情感", "人際功能", "A群", "B群", "C群"]
+  }
+]
