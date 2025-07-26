@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>診斷學小測驗</title>
+<style>
+  body { font-family: sans-serif; padding: 2em; background:#f7f9fc;}
+  h1 {color:#2c3e50;}
+  .question-card { background:#fff; padding:1em; margin-bottom:1em; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1);}
+  textarea {width:100%; height:100px; margin-top:0.5em;}
+  button {padding:0.5em 1em; margin-top:1em; cursor:pointer;}
+  .result {margin-top:0.5em; color:green;}
+</style>
+</head>
+<body>
+<h1>診斷學小測驗</h1>
+<div id="quiz"></div>
+<button onclick="submitAnswers()">提交作答</button>
+
+<script>
+const questions = [
+  {
+    id: 1,
+    question: "1. 什麼是幻覺（Hallucination）？請列出兩種常見類型並解釋 AH、VH。",
+    keywords: ["感官", "無刺激", "聽幻覺", "視幻覺", "AH", "VH"]
+  },
+  {
+    id: 2,
+    question: "2. 思覺失調症的三個主要診斷條件是什麼？",
+    keywords: ["妄想", "幻覺", "語無倫次", "功能受損", "持續六個月"]
+  },
+  {
+    id: 3,
+    question: "3. 躁症與鬱症發作的主要差異是什麼？",
+    keywords: ["高昂", "活動量增加", "持續一週", "鬱症", "失去興趣", "兩週"]
+  },
+  {
+    id: 4,
+    question: "4. 請說明 Dysthymic Disorder（氣質性憂鬱症）的特徵。",
+    keywords: ["兩年", "輕度", "憂鬱情緒", "功能減損"]
+  },
+  {
+    id: 5,
+    question: "5. Major Depression Disorder 的診斷準則為何？",
+    keywords: ["五項症狀", "兩週", "憂鬱情緒", "失去興趣", "功能受損"]
+  },
+  {
+    id: 6,
+    question: "6. 認知症（Dementia）診斷需具備哪些條件？",
+    keywords: ["認知功能下降", "日常功能受損", "非譫妄", "非精神病"]
+  },
+  {
+    id: 7,
+    question: "7. 什麼是 EPS？請舉出三種症狀。",
+    keywords: ["錐體外", "肌張力", "靜坐不能", "巴金森氏", "運動困難"]
+  },
+  {
+    id: 8,
+    question: "8. 性格障礙（Personality Disorder）的診斷準則有哪些？請列出三個類型。",
+    keywords: ["內在經驗", "行為偏差", "功能損害", "A群", "B群", "C群"]
+  }
+];
+
+const quiz = document.getElementById("quiz");
+questions.forEach(q => {
+  const div = document.createElement("div");
+  div.className = "question-card";
+  div.innerHTML = `<p>${q.question}</p><textarea id="ans-${q.id}"></textarea><div id="res-${q.id}" class="result"></div>`;
+  quiz.appendChild(div);
+});
+
+function submitAnswers() {
+  questions.forEach(q => {
+    const ans = document.getElementById(`ans-${q.id}`).value;
+    const score = q.keywords.filter(kw => ans.includes(kw)).length / q.keywords.length;
+    const feedback = score >= 0.7 ? "✅ 很好！" : score >= 0.4 ? "🟡 還不錯，可以更精準些" : "🔴 需要再加強喔";
+    document.getElementById(`res-${q.id}`).innerText = feedback;
+  });
+}
+</script>
+</body>
+</html>
